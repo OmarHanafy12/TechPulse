@@ -79,7 +79,3 @@ src/
 │   └── components/       # Component-specific stylesheets
 └── utils/                # Utility functions (date parsing)
 ```
-
-## License
-
-This project is for portfolio and educational purposes.
