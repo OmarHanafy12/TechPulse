@@ -1,0 +1,486 @@
+.sidebar {
+  width: 250px; /* KEPT ORIGINAL WIDTH */
+  flex-shrink: 0;
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 20px;
+  align-self: flex-start;
+}
+
+.sidebar h3 {
+  margin-top: 0;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+.filter-group {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.filter-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+}
+
+.dropdown-trigger,
+.custom-datepicker-input {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: #333;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.dropdown-trigger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dropdown-trigger::after {
+  content: '▼';
+  font-size: 0.7em;
+}
+
+.dropdown-panel {
+  position: absolute;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 5px 5px;
+  background-color: white;
+  z-index: 100;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.checkbox-group {
+  max-height: 150px;
+  overflow-y: auto;
+  padding: 8px;
+}
+.checkbox-item {
+  display: block;
+  padding: 3px 0;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.checkbox-item.all-option {
+  font-weight: bold;
+  padding-bottom: 6px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #eee;
+}
+.checkbox-item input {
+  margin-right: 8px;
+}
+
+.filter-group .react-datepicker-wrapper {
+  width: 100%;
+}
+
+.clear-button,
+.download-button {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* KEPT ORIGINAL BUTTON COLORS */
+.clear-button {
+  background-color: #656565;
+  color: white;
+}
+.clear-button:hover {
+  background-color: #3b3b3b;
+}
+
+.download-section {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #f0f0f0;
+}
+.download-section select {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: #333;
+  box-sizing: border-box;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+.download-button {
+  background-color: #5C2D91;
+  color: white;
+}
+.download-button:hover {
+  background-color:#4f267e;
+}
+.download-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+.back-link{
+  text-decoration: none;
+}
+
+/* ============================================================
+   REACT-DATEPICKER — Themed to match the TechPulse design system
+   Uses CSS custom properties from designSystem.css so it adapts
+   to both light and dark modes automatically.
+   ============================================================ */
+
+.react-datepicker-popper {
+  z-index: 50;
+}
+
+.react-datepicker {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18), 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 8px;
+  overflow: hidden;
+  width: 236px !important; /* Force compact width so it fits within the sidebar dimension */
+  box-sizing: border-box !important;
+}
+
+.react-datepicker__month-container {
+  width: 100% !important;
+  float: none !important;
+  box-sizing: border-box !important;
+}
+
+.react-datepicker__triangle {
+  display: none;
+}
+
+/* Header */
+.react-datepicker__header {
+  background-color: transparent;
+  border-bottom: 1px solid var(--border);
+  padding: 2px 0 6px;
+}
+
+.react-datepicker__current-month {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--luster);
+  padding-bottom: 4px;
+  letter-spacing: -0.3px;
+}
+
+/* Navigation arrows */
+.react-datepicker__navigation {
+  top: 8px;
+}
+
+.react-datepicker__navigation-icon::before {
+  border-color: var(--aster);
+  border-width: 2px 2px 0 0;
+  height: 6px;
+  width: 6px;
+  transition: border-color 0.2s;
+}
+
+.react-datepicker__navigation:hover .react-datepicker__navigation-icon::before {
+  border-color: var(--habanero);
+}
+
+/* Day names */
+.react-datepicker__day-names {
+  margin-bottom: -2px;
+}
+
+.react-datepicker__day-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--aster);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  width: 2rem;
+  line-height: 1.8rem;
+}
+
+/* Day cells, month cells, year cells */
+.react-datepicker__day,
+.react-datepicker__month-text,
+.react-datepicker__year-text {
+  color: var(--luster);
+  width: 2rem;
+  line-height: 2rem;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+  margin: 1px;
+}
+
+/* Hover */
+.react-datepicker__day:hover,
+.react-datepicker__month-text:hover,
+.react-datepicker__year-text:hover {
+  background-color: var(--chip-active) !important;
+  color: var(--habanero) !important;
+  border-radius: 8px;
+}
+
+/* Selected */
+.react-datepicker__day--selected,
+.react-datepicker__month-text--selected,
+.react-datepicker__year-text--selected,
+.react-datepicker__day--keyboard-selected,
+.react-datepicker__month-text--keyboard-selected {
+  background: linear-gradient(135deg, var(--habanero), var(--habanero-dark)) !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(249, 133, 19, 0.35);
+}
+
+.react-datepicker__day--selected:hover,
+.react-datepicker__month-text--selected:hover,
+.react-datepicker__year-text--selected:hover {
+  background: linear-gradient(135deg, var(--habanero-dark), var(--habanero)) !important;
+  color: #ffffff !important;
+}
+
+/* Today */
+.react-datepicker__day--today {
+  font-weight: 700;
+  color: var(--habanero) !important;
+  border: 1.5px solid var(--habanero) !important;
+  border-radius: 8px;
+}
+
+.react-datepicker__day--today:hover:not(.react-datepicker__day--selected) {
+  background-color: var(--chip-active) !important;
+  color: var(--habanero) !important;
+}
+
+/* Outside month */
+.react-datepicker__day--outside-month {
+  color: var(--aster);
+  opacity: 0.35;
+}
+
+.react-datepicker__day--outside-month:hover {
+  background-color: transparent !important;
+  color: var(--aster) !important;
+}
+
+/* Month/Year picker specific styles — 4 columns × 3 rows */
+.react-datepicker__month--selecting-range,
+.react-datepicker__month {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 4px !important;
+  padding: 2px;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.react-datepicker__month-wrapper {
+  display: contents !important;
+}
+
+.react-datepicker__month .react-datepicker__month-text {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 6px 2px !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  border-radius: 6px !important;
+  font-size: 11px !important;
+  box-sizing: border-box !important;
+}
+
+.react-datepicker__year .react-datepicker__year-text {
+  padding: 5px 0;
+  width: 4rem;
+  margin: 2px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+/* Disabled state */
+.react-datepicker__day--disabled {
+  color: var(--aster) !important;
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.react-datepicker__day--disabled:hover {
+  background-color: transparent !important;
+}
+
+/* Sidebar DatePicker input override */
+.react-datepicker-wrapper {
+  width: 100% !important;
+}
+
+.react-datepicker-wrapper input.tn-search {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  font-size: 13px !important;
+  color: var(--luster) !important;
+  outline: none !important;
+  width: 100% !important;
+  box-shadow: none !important;
+}
+
+/* Custom Checkbox styles for TechPulse topic filters */
+.tn-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  border: 1.5px solid var(--border);
+  border-radius: 4px;
+  background-color: var(--chip-bg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  position: relative;
+  margin: 0;
+}
+
+.tn-checkbox:hover {
+  border-color: var(--habanero);
+}
+
+.tn-checkbox:checked {
+  background-color: var(--habanero);
+  border-color: var(--habanero);
+}
+
+.tn-checkbox:checked::after {
+  content: "";
+  position: absolute;
+  left: 4.5px;
+  top: 1.5px;
+  width: 3.5px;
+  height: 6.5px;
+  border: solid #ffffff;
+  border-width: 0 1.5px 1.5px 0;
+  transform: rotate(45deg);
+}
+
+/* Make sure active state styling of chips coordinates with checkbox state */
+.tn-filter-chip {
+  transition: background 0.2s, border-color 0.2s, color 0.2s !important;
+}
+
+.tn-filter-chip.active {
+  border-color: rgba(249, 133, 19, 0.3) !important;
+}
+
+/* ── Filter Dropdown Animation ──────────────────────────── */
+.tn-filter-dropdown {
+  animation: filterDropdownSlide 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  overflow: hidden;
+}
+
+@keyframes filterDropdownSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 500px;
+  }
+}
+
+/* Stagger individual filter chips */
+.tn-filter-dropdown > .tn-filter-chip {
+  animation: filterChipFadeIn 0.25s ease both;
+}
+
+.tn-filter-dropdown > .tn-filter-chip:nth-child(1) { animation-delay: 0.02s; }
+.tn-filter-dropdown > .tn-filter-chip:nth-child(2) { animation-delay: 0.05s; }
+.tn-filter-dropdown > .tn-filter-chip:nth-child(3) { animation-delay: 0.08s; }
+.tn-filter-dropdown > .tn-filter-chip:nth-child(4) { animation-delay: 0.11s; }
+.tn-filter-dropdown > .tn-filter-chip:nth-child(5) { animation-delay: 0.14s; }
+.tn-filter-dropdown > .tn-filter-chip:nth-child(6) { animation-delay: 0.17s; }
+.tn-filter-dropdown > .tn-filter-chip:nth-child(7) { animation-delay: 0.20s; }
+
+.tn-filter-dropdown > label.tn-filter-chip {
+  animation: filterChipFadeIn 0.25s ease both;
+}
+
+.tn-filter-dropdown > label.tn-filter-chip:nth-child(1) { animation-delay: 0.02s; }
+.tn-filter-dropdown > label.tn-filter-chip:nth-child(2) { animation-delay: 0.05s; }
+.tn-filter-dropdown > label.tn-filter-chip:nth-child(3) { animation-delay: 0.08s; }
+.tn-filter-dropdown > label.tn-filter-chip:nth-child(4) { animation-delay: 0.11s; }
+.tn-filter-dropdown > label.tn-filter-chip:nth-child(5) { animation-delay: 0.14s; }
+.tn-filter-dropdown > label.tn-filter-chip:nth-child(6) { animation-delay: 0.17s; }
+.tn-filter-dropdown > label.tn-filter-chip:nth-child(7) { animation-delay: 0.20s; }
+
+@keyframes filterChipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ── Mobile Sidebar Overlay Backdrop ────────────────────── */
+.tn-sidebar-backdrop {
+  position: fixed;
+  top: 52px;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 52px);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  z-index: 49;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.tn-sidebar-backdrop.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (min-width: 1024px) {
+  .tn-sidebar-backdrop {
+    display: none;
+  }
+}
