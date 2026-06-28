@@ -4,25 +4,24 @@ const monthMap = {
   "July": 6, "August": 7, "September": 8, "October": 9, "November": 10, "December": 11
 };
 
-// This function safely converts "Month Year" strings to a reliable Date object
+// Converts "Month Year", ISO, and "YYYY-MM-DD HH:MM:SS" strings to a Date
 export const parseMonthYear = (dateString) => {
   if (!dateString || typeof dateString !== 'string') {
     return null;
   }
-  
+
   const parts = dateString.split(' ');
-  if (parts.length !== 2) {
-    const fallbackDate = new Date(dateString);
-    return isNaN(fallbackDate.getTime()) ? null : fallbackDate;
-  }
-  
-  const monthName = parts[0];
-  const year = parseInt(parts[1], 10);
-  const month = monthMap[monthName];
+  if (parts.length === 2) {
+    const monthName = parts[0];
+    const year = parseInt(parts[1], 10);
+    const month = monthMap[monthName];
 
-  if (month === undefined || isNaN(year)) {
-    return null;
+    if (month !== undefined && !isNaN(year)) {
+      return new Date(year, month, 1);
+    }
   }
 
-  return new Date(year, month, 1);
+  const normalized = dateString.includes('T') ? dateString : dateString.replace(' ', 'T');
+  const parsed = new Date(normalized);
+  return isNaN(parsed.getTime()) ? null : parsed;
 };

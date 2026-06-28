@@ -20,7 +20,7 @@ const HomePage = () => {
     setIsMobileSidebarOpen
   } = usePageNavigation();
   
-  const { articles, loading } = useArticles(filters);
+  const { articles, loading } = useArticles();
   
   const [currentPage, setCurrentPage] = useState(homePageState.currentPage);
   const [articlesPerPage, setArticlesPerPage] = useState(homePageState.articlesPerPage);

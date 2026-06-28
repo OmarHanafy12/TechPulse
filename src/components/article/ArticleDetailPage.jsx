@@ -91,10 +91,10 @@ const ArticleDetailPage = () => {
           )}
 
           {article.imageUrls && article.imageUrls.length > 1 && (
-            <div style={{ display: 'flex', gap: 10, marginTop: 20 }}>
+            <div className="tn-art-inline-gallery">
               {article.imageUrls.slice(1).map((url, idx) => (
-                <div key={idx} className="tn-art-inline-img" style={{ cursor: 'zoom-in', width: 150, height: 100, overflow: 'hidden' }} onClick={() => { setLightboxIndex(idx + 1); setLightboxOpen(true); }}>
-                  <img src={url} alt={`${article.title} ${idx + 2}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <div key={idx} className="tn-art-inline-img" onClick={() => { setLightboxIndex(idx + 1); setLightboxOpen(true); }}>
+                  <img src={url} alt={`${article.title} ${idx + 2}`} />
                 </div>
               ))}
             </div>

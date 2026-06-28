@@ -1,26 +1,26 @@
 import { useState, useEffect } from 'react';
 import { fetchArticles, fetchArticleById } from '@/services/articleService';
 
-export const useArticles = (filters = {}) => {
+export const useArticles = () => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     let isMounted = true;
-    
+
     const loadArticles = async () => {
       try {
         setLoading(true);
-        const data = await fetchArticles(filters);
+        const data = await fetchArticles();
         if (isMounted) {
           setArticles(data);
           setError(null);
         }
       } catch (err) {
         if (isMounted) {
-          console.error("Error fetching articles:", err);
-          setError(err.message || "Failed to load articles");
+          console.error('Error fetching articles:', err);
+          setError(err.message || 'Failed to load articles');
           setArticles([]);
         }
       } finally {
@@ -35,7 +35,7 @@ export const useArticles = (filters = {}) => {
     return () => {
       isMounted = false;
     };
-  }, [JSON.stringify(filters)]); // Re-fetch if filters change
+  }, []);
 
   return { articles, loading, error };
 };
