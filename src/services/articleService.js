@@ -34,71 +34,29 @@ const hashUrl = (url) => {
   return Math.abs(hash).toString(36);
 };
 
-const transformNewsApiArticle = (apiArticle, index) => {
-  const topicIdx = (apiArticle.title.length + index) % topicsList.length;
-  const domainIdx = (apiArticle.description?.length || index) % domainsList.length;
+const transformArticle = (apiArticle, index, mapping) => {
+  const topicIdx = ((apiArticle.title || '').length + index) % topicsList.length;
+  const domainIdx = ((apiArticle.description || '').length || index) % domainsList.length;
 
   return {
-    id: hashUrl(apiArticle.url) || String(index),
+    id: mapping.id(apiArticle) || String(index),
     title: apiArticle.title,
     summary: apiArticle.description,
     content: apiArticle.content,
     domain: domainsList[domainIdx],
     topic: topicsList[topicIdx],
-    publicationDate: apiArticle.publishedAt,
-    imageUrls: apiArticle.urlToImage ? [apiArticle.urlToImage] : [],
+    publicationDate: mapping.pubDate(apiArticle),
+    imageUrls: mapping.image(apiArticle) ? [mapping.image(apiArticle)] : [],
     referenceUrl: {
-      name: apiArticle.source?.name || 'External Source',
-      link: apiArticle.url,
+      name: mapping.sourceName(apiArticle) || 'External Source',
+      link: mapping.link(apiArticle),
     },
   };
 };
-
-const transformGNewsArticle = (apiArticle, index) => {
-  const topicIdx = (apiArticle.title.length + index) % topicsList.length;
-  const domainIdx = (apiArticle.description?.length || index) % domainsList.length;
-
-  return {
-    id: apiArticle.id || String(index),
-    title: apiArticle.title,
-    summary: apiArticle.description,
-    content: apiArticle.content,
-    domain: domainsList[domainIdx],
-    topic: topicsList[topicIdx],
-    publicationDate: apiArticle.publishedAt,
-    imageUrls: apiArticle.image ? [apiArticle.image] : [],
-    referenceUrl: {
-      name: apiArticle.source?.name || 'External Source',
-      link: apiArticle.url,
-    },
-  };
-};
-
-const transformNewsDataArticle = (apiArticle, index) => {
-  const topicIdx = (apiArticle.title.length + index) % topicsList.length;
-  const domainIdx = (apiArticle.description?.length || index) % domainsList.length;
-
-  return {
-    id: apiArticle.article_id || String(index),
-    title: apiArticle.title,
-    summary: apiArticle.description,
-    content: apiArticle.content,
-    domain: domainsList[domainIdx],
-    topic: topicsList[topicIdx],
-    publicationDate: apiArticle.pubDate,
-    imageUrls: apiArticle.image_url ? [apiArticle.image_url] : [],
-    referenceUrl: {
-      name: apiArticle.source_name || 'External Source',
-      link: apiArticle.link,
-    },
-  };
-};
-
 async function fetchFromApi() {
   const provider = getApiProvider();
 
   if (provider === 'newsapi') {
-    console.log('Fetching fresh articles from NewsAPI...');
     const response = await fetch('/api/news?category=technology&language=en&pageSize=100');
 
     if (!response.ok) {
@@ -110,12 +68,17 @@ async function fetchFromApi() {
       throw new Error(data.message || 'NewsAPI error');
     }
 
-    return (data.articles || []).map((art, idx) => transformNewsApiArticle(art, idx));
+    return (data.articles || []).map((art, idx) => transformArticle(art, idx, {
+      id: a => hashUrl(a.url),
+      pubDate: a => a.publishedAt,
+      image: a => a.urlToImage,
+      sourceName: a => a.source?.name,
+      link: a => a.url,
+    }));
   }
 
   if (provider === 'newsdata') {
     const apiKey = import.meta.env.VITE_NEWSDATA_API_KEY;
-    console.log('Fetching fresh articles from NewsData API...');
     const response = await fetch(
       `https://newsdata.io/api/1/news?apikey=${apiKey}&category=technology&language=en`
     );
@@ -129,11 +92,16 @@ async function fetchFromApi() {
       throw new Error(data.message || data.results?.message || 'NewsData API error');
     }
 
-    return (data.results || []).map((art, idx) => transformNewsDataArticle(art, idx));
+    return (data.results || []).map((art, idx) => transformArticle(art, idx, {
+      id: a => a.article_id,
+      pubDate: a => a.pubDate,
+      image: a => a.image_url,
+      sourceName: a => a.source_name,
+      link: a => a.link,
+    }));
   }
 
   const apiKey = import.meta.env.VITE_GNEWS_API_KEY;
-  console.log('Fetching fresh articles from GNews API...');
   const response = await fetch(
     `https://gnews.io/api/v4/top-headlines?category=technology&lang=en&max=100&apikey=${apiKey}`
   );
@@ -143,7 +111,13 @@ async function fetchFromApi() {
   }
 
   const data = await response.json();
-  return (data.articles || []).map((art, idx) => transformGNewsArticle(art, idx));
+  return (data.articles || []).map((art, idx) => transformArticle(art, idx, {
+    id: a => a.id,
+    pubDate: a => a.publishedAt,
+    image: a => a.image,
+    sourceName: a => a.source?.name,
+    link: a => a.url,
+  }));
 }
 
 export async function fetchArticles(filters = {}) {
@@ -157,7 +131,6 @@ export async function fetchArticles(filters = {}) {
         Array.isArray(cachedData.articles) &&
         cachedData.articles.length > 0
       ) {
-        console.log('Serving articles from cache');
         return filterArticles(cachedData.articles, filters);
       }
     }
@@ -189,7 +162,6 @@ export async function fetchArticles(filters = {}) {
     if (cachedDataString) {
       const cachedData = JSON.parse(cachedDataString);
       if (Array.isArray(cachedData.articles) && cachedData.articles.length > 0) {
-        console.log('Returning expired cache due to API failure.');
         return filterArticles(cachedData.articles, filters);
       }
     }

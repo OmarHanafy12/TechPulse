@@ -71,22 +71,11 @@ const Sidebar = ({
             <div 
               className="tn-section-label" 
               onClick={() => setIsTopicOpen(!isTopicOpen)}
-              style={{ display: 'flex', justifyContent: 'space-between', cursor: 'pointer', alignItems: 'center' }}
             >
               Topics
-              <span style={{ 
-                display: 'inline-flex', 
-                alignItems: 'center', 
-                justifyContent: 'center',
-                width: 20, 
-                height: 20, 
-                borderRadius: 4,
-                background: 'var(--chip-bg)',
-                fontSize: 14,
-                fontWeight: 600,
-                transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                transform: isTopicOpen ? 'rotate(180deg)' : 'rotate(0deg)'
-              }}>{isTopicOpen ? '−' : '+'}</span>
+              <span className={`tn-chevron ${isTopicOpen ? 'open' : ''}`}>
+                {isTopicOpen ? '−' : '+'}
+              </span>
             </div>
             
             {isTopicOpen && (
