@@ -12,7 +12,8 @@ import { useArticles } from '@/hooks/useArticles';
 const HomePage = () => {
   const { 
     homePageState, 
-    updateHomePageState, 
+    updateHomePageState,
+    saveScrollPosition
   } = usePageNavigation();
 
   const {
