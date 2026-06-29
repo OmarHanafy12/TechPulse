@@ -1,18 +1,19 @@
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { usePageNavigation } from "@/contexts/NavigationContext";
+import { useSidebar } from "@/contexts/SidebarContext";
+import { useTheme } from "@/contexts/ThemeContext";
 import { IconSun, IconMoon } from "@tabler/icons-react";
 
 const NavBar = () => {
+  const { updateHomePageState } = usePageNavigation();
   const { 
-    updateHomePageState, 
     isMobileSidebarOpen, 
     setIsMobileSidebarOpen,
     isDesktopSidebarOpen,
-    setIsDesktopSidebarOpen,
-    theme,
-    toggleTheme
-  } = usePageNavigation();
+    setIsDesktopSidebarOpen
+  } = useSidebar();
+  const { theme, toggleTheme } = useTheme();
 
   const location = useLocation();
   const isArticlePage = location.pathname.startsWith('/article/');

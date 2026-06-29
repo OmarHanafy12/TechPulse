@@ -1,16 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { IconUser, IconClock, IconEye, IconBrain, IconShield, IconRocket, IconLeaf, IconDna, IconLayoutGrid } from "@tabler/icons-react";
-
-const getTopicStyles = (topic) => {
-  const t = topic.toLowerCase();
-  if (t.includes('ai') || t.includes('artificial')) return { colorClass: 'cat-ai', dotClass: 'dot-ai', icon: <IconBrain /> };
-  if (t.includes('security') || t.includes('cyber')) return { colorClass: 'cat-security', dotClass: 'dot-security', icon: <IconShield /> };
-  if (t.includes('space')) return { colorClass: 'cat-space', dotClass: 'dot-space', icon: <IconRocket /> };
-  if (t.includes('green') || t.includes('climate')) return { colorClass: 'cat-climate', dotClass: 'dot-climate', icon: <IconLeaf /> };
-  if (t.includes('bio')) return { colorClass: 'cat-bio', dotClass: 'dot-bio', icon: <IconDna /> };
-  return { colorClass: '', dotClass: '', icon: <IconLayoutGrid /> };
-};
+import { IconUser, IconClock, IconEye } from "@tabler/icons-react";
+import { getTopicStyles } from '@/utils/topicUtils';
 
 const ArticleCard = ({ article, onClick, isHero = false }) => {
   const { colorClass, dotClass, icon } = getTopicStyles(article.topic);

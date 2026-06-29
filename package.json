@@ -9,7 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.39.0",
     "@tabler/icons-react": "^3.44.0",
     "react": "^19.2.7",
     "react-datepicker": "^8.7.0",

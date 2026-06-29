@@ -14,6 +14,7 @@
   --chip-bg: rgba(74,93,143,0.08);
   --chip-active: rgba(249,133,19,0.15);
   --card-bg: #ffffff;
+  --night: #ffffff;
 }
 
 [data-theme="dark"] {
@@ -30,6 +31,7 @@
   --chip-bg: rgba(34,51,130,0.4);
   --chip-active: rgba(249,133,19,0.2);
   --card-bg: #111144;
+  --night: #111144;
 }
 
 /* Global Root */
@@ -161,42 +163,7 @@
   border-radius: 50%;
   display: inline-block;
 }
-.tn-nav-links {
-  display: none; /* Mobile first: hidden by default */
-  gap: 20px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-@media (min-width: 768px) {
-  .tn-nav-links {
-    display: flex;
-  }
-}
-.tn-nav-links li {
-  font-size: 13px;
-  color: var(--aster);
-  cursor: pointer;
-  transition: color 0.2s;
-}
-.tn-nav-links li:hover { color: var(--luster); }
-.tn-nav-links li.active { color: var(--habanero); font-weight: 500; }
-.tn-nav-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.tn-nav-avatar {
-  width: 30px; height: 30px;
-  border-radius: 50%;
-  background: var(--royal);
-  border: 1.5px solid var(--aster);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--luster);
-  cursor: pointer;
-}
+
 
 /* ── Animated Burger Icon ──────────────────────────────── */
 .tn-burger {

@@ -171,26 +171,6 @@ export async function fetchArticles(filters = {}) {
 
     let articles = await fetchFromApi();
 
-    // Multiply articles from the API with different historical dates to test timeframe filters
-    if (articles.length > 0) {
-      const multipliedArticles = [...articles];
-      // Generate copies going back in time: 7 days, 1 month, 3 months, 6 months, 1 year, 2 years
-      const timeFrames = [7, 30, 90, 180, 365, 730];
-      
-      articles.forEach((art) => {
-        timeFrames.forEach((days, timeIdx) => {
-          const originalDate = new Date(art.publicationDate).getTime();
-          // Subtract the days and add a random offset up to 3 days to make dates look natural
-          const newDate = new Date(originalDate - (days * 24 * 60 * 60 * 1000) - (Math.random() * 3 * 24 * 60 * 60 * 1000));
-          multipliedArticles.push({
-            ...art,
-            id: `${art.id}-copy-${timeIdx}`,
-            publicationDate: newDate.toISOString(),
-          });
-        });
-      });
-      articles = multipliedArticles;
-    }
 
     if (articles.length > 0) {
       localStorage.setItem(

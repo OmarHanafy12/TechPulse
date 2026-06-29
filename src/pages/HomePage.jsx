@@ -5,20 +5,27 @@ import SearchBar from '@/components/ui/SearchBar';
 import Pagination from '@/components/ui/Pagination';
 import { parseMonthYear } from '@/utils/dateUtils';
 import { usePageNavigation } from '@/contexts/NavigationContext';
+import { useSidebar } from '@/contexts/SidebarContext';
+import { useFilter } from '@/contexts/FilterContext';
 import { useArticles } from '@/hooks/useArticles';
 
 const HomePage = () => {
   const { 
     homePageState, 
     updateHomePageState, 
-    saveScrollPosition,
+  } = usePageNavigation();
+
+  const {
     filters,
     setFilters,
-    handleClearFilters,
+    handleClearFilters
+  } = useFilter();
+
+  const {
     isDesktopSidebarOpen,
     isMobileSidebarOpen,
     setIsMobileSidebarOpen
-  } = usePageNavigation();
+  } = useSidebar();
   
   const { articles, loading } = useArticles();
   
@@ -28,6 +35,7 @@ const HomePage = () => {
   
   const scrollRestored = useRef(false);
   const isInitialized = useRef(false);
+  const scrollTimeoutRef = useRef(null);
 
   // Restore scroll position on mount
   useEffect(() => {
@@ -59,8 +67,8 @@ const HomePage = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      clearTimeout(window.scrollTimeout);
-      window.scrollTimeout = setTimeout(() => {
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+      scrollTimeoutRef.current = setTimeout(() => {
         saveScrollPosition();
       }, 150);
     };
@@ -68,7 +76,7 @@ const HomePage = () => {
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      clearTimeout(window.scrollTimeout);
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
     };
   }, [saveScrollPosition]);
 
@@ -152,10 +160,6 @@ const HomePage = () => {
 
   return (
     <div className={`tn-home-layout ${!isDesktopSidebarOpen ? 'desktop-closed' : ''}`}>
-      <div 
-        className={`tn-sidebar-backdrop ${isMobileSidebarOpen ? 'visible' : ''}`}
-        onClick={() => setIsMobileSidebarOpen(false)}
-      />
       <Sidebar 
         topics={uniqueTopics}
         filters={filters}

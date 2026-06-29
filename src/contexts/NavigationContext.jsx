@@ -19,7 +19,6 @@ export const usePageNavigation = () => {
 };
 
 export const NavigationProvider = ({ children }) => {
-  // --- Your existing page state logic (preserved) ---
   const defaultPageState = {
     currentPage: 1,
     articlesPerPage: 10,
@@ -54,56 +53,10 @@ export const NavigationProvider = ({ children }) => {
     updateHomePageState({ scrollPosition: scrollY });
   }, [updateHomePageState]);
 
-  // --- NEW: Filter state logic (integrated) ---
-  const initialFilters = {
-    topics: {},
-    startDate: null,
-    endDate: null,
-  };
-
-  const [filters, setFilters] = useState(initialFilters);
-
-  const handleClearFilters = () => {
-    setFilters(initialFilters);
-  };
-
-  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
-  const [isDesktopSidebarOpen, setIsDesktopSidebarOpen] = useState(true);
-  const [isTopicOpen, setIsTopicOpen] = useState(true);
-
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem("appTheme") || "light";
-  });
-
-  useEffect(() => {
-    localStorage.setItem("appTheme", theme);
-    if (theme === "dark") {
-      document.documentElement.setAttribute("data-theme", "dark");
-    } else {
-      document.documentElement.removeAttribute("data-theme");
-    }
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(prev => prev === "light" ? "dark" : "light");
-  };
-
-  // --- Provide all values through the context ---
   const value = {
     homePageState,
     updateHomePageState,
     saveScrollPosition,
-    filters,
-    setFilters,
-    handleClearFilters,
-    isMobileSidebarOpen,
-    setIsMobileSidebarOpen,
-    isDesktopSidebarOpen,
-    setIsDesktopSidebarOpen,
-    isTopicOpen,
-    setIsTopicOpen,
-    theme,
-    toggleTheme,
   };
 
   return (
@@ -112,3 +65,4 @@ export const NavigationProvider = ({ children }) => {
     </NavigationContext.Provider>
   );
 };
+

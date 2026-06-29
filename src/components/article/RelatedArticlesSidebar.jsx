@@ -1,22 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useArticles } from '@/hooks/useArticles';
-import { usePageNavigation } from '@/contexts/NavigationContext';
-import { IconBrain, IconShield, IconRocket, IconLeaf, IconDna, IconLayoutGrid } from "@tabler/icons-react";
-
-const getTopicStyles = (topic) => {
-  const t = topic.toLowerCase();
-  if (t.includes('ai') || t.includes('artificial')) return { colorClass: 'cat-ai', icon: <IconBrain /> };
-  if (t.includes('security') || t.includes('cyber')) return { colorClass: 'cat-security', icon: <IconShield /> };
-  if (t.includes('space')) return { colorClass: 'cat-space', icon: <IconRocket /> };
-  if (t.includes('green') || t.includes('climate')) return { colorClass: 'cat-climate', icon: <IconLeaf /> };
-  if (t.includes('bio')) return { colorClass: 'cat-bio', icon: <IconDna /> };
-  return { colorClass: '', icon: <IconLayoutGrid /> };
-};
+import { useSidebar } from '@/contexts/SidebarContext';
+import { getTopicStyles } from '@/utils/topicUtils';
 
 const RelatedArticlesSidebar = ({ currentArticle }) => {
   const { articles } = useArticles();
-  const { isMobileSidebarOpen, setIsMobileSidebarOpen } = usePageNavigation();
+  const { isMobileSidebarOpen, setIsMobileSidebarOpen } = useSidebar();
   
   if (!currentArticle || !Array.isArray(articles)) return null;
 
@@ -28,10 +18,6 @@ const RelatedArticlesSidebar = ({ currentArticle }) => {
 
   return (
     <>
-      <div 
-        className={`tn-sidebar-backdrop ${isMobileSidebarOpen ? 'visible' : ''}`}
-        onClick={() => setIsMobileSidebarOpen(false)}
-      />
       <aside className={`tn-art-sidebar ${isMobileSidebarOpen ? 'mobile-open' : ''}`}>
 
         {articlesToShow.length > 0 ? (

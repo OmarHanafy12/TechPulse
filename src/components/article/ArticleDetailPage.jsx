@@ -6,13 +6,13 @@ import { useArticle } from '@/hooks/useArticles';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
-import { usePageNavigation } from '@/contexts/NavigationContext';
+import { useSidebar } from '@/contexts/SidebarContext';
 import { IconArrowLeft } from '@tabler/icons-react';
 
 const ArticleDetailPage = () => {
   const { articleId } = useParams();
   const { article, loading } = useArticle(articleId);
-  const { isDesktopSidebarOpen, setIsDesktopSidebarOpen } = usePageNavigation();
+  const { isDesktopSidebarOpen, setIsDesktopSidebarOpen } = useSidebar();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -118,8 +118,8 @@ const ArticleDetailPage = () => {
         slides={lightboxSlides}
         index={lightboxIndex}
         styles={{
-          container: { backgroundColor: "white" },
-          backdrop: { backgroundColor: "white" },
+          container: { backgroundColor: "var(--depths)" },
+          backdrop: { backgroundColor: "rgba(0, 0, 0, 0.8)" },
         }}
       />
     </>

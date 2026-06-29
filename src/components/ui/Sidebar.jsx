@@ -2,19 +2,9 @@ import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { usePageNavigation } from "@/contexts/NavigationContext";
-import { IconLayoutGrid, IconBrain, IconShield, IconRocket, IconLeaf, IconDna, IconCalendarEvent } from "@tabler/icons-react";
-
-// Helper to map topic to icon
-const getTopicIcon = (topic) => {
-  const t = topic.toLowerCase();
-  if (t.includes('ai') || t.includes('artificial')) return <IconBrain />;
-  if (t.includes('security') || t.includes('cyber')) return <IconShield />;
-  if (t.includes('space')) return <IconRocket />;
-  if (t.includes('green') || t.includes('climate')) return <IconLeaf />;
-  if (t.includes('bio')) return <IconDna />;
-  return <IconLayoutGrid />;
-};
+import { useSidebar } from "@/contexts/SidebarContext";
+import { IconLayoutGrid, IconCalendarEvent } from "@tabler/icons-react";
+import { getTopicIcon } from "@/utils/topicUtils";
 
 const Sidebar = ({
   topics,
@@ -22,8 +12,7 @@ const Sidebar = ({
   setFilters,
   onClearFilters,
 }) => {
-  const { isMobileSidebarOpen, setIsMobileSidebarOpen, isTopicOpen, setIsTopicOpen } = usePageNavigation();
-  const [isFiltersOpen, setIsFiltersOpen] = useState(true);
+  const { isMobileSidebarOpen, isTopicOpen, setIsTopicOpen } = useSidebar();
 
   const handleFilterToggle = (type, name) => {
     if (name === "all") {
@@ -77,7 +66,7 @@ const Sidebar = ({
   return (
     <aside className={`tn-sidebar ${isMobileSidebarOpen ? 'mobile-open' : ''}`}>
 
-      <div className={`tn-sidebar-collapsible ${isFiltersOpen ? 'open' : 'closed'}`}>
+      <div className="tn-sidebar-collapsible open">
           <div className="tn-filter-group">
             <div 
               className="tn-section-label" 
