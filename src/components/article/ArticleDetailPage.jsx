@@ -84,9 +84,15 @@ const ArticleDetailPage = () => {
 
           {hasContent && (
             <div className="tn-art-body">
-              <p>
-                {article.content.replace(/\s*\[\d+\s+chars\]\s*$/, '').trim()}
-              </p>
+              {article.content
+                .replace(/\s*\[\+?\d+\s+chars?\]\.?\s*$/i, '')
+                .replace(/\s*…\s*\[\+?\d+\s+chars?\]\s*$/i, '')
+                .trim()
+                .split(/\n\n+/)
+                .map((paragraph, idx) => (
+                  <p key={idx}>{paragraph.trim()}</p>
+                ))
+              }
             </div>
           )}
 

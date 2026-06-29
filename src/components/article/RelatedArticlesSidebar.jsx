@@ -33,6 +33,7 @@ const RelatedArticlesSidebar = ({ currentArticle }) => {
         onClick={() => setIsMobileSidebarOpen(false)}
       />
       <aside className={`tn-art-sidebar ${isMobileSidebarOpen ? 'mobile-open' : ''}`}>
+
         {articlesToShow.length > 0 ? (
           <>
             <div className="tn-sug-label">More in {currentArticle.topic}</div>

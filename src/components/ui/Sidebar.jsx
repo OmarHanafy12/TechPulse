@@ -22,7 +22,7 @@ const Sidebar = ({
   setFilters,
   onClearFilters,
 }) => {
-  const { isMobileSidebarOpen, isTopicOpen, setIsTopicOpen } = usePageNavigation();
+  const { isMobileSidebarOpen, setIsMobileSidebarOpen, isTopicOpen, setIsTopicOpen } = usePageNavigation();
   const [isFiltersOpen, setIsFiltersOpen] = useState(true);
 
   const handleFilterToggle = (type, name) => {

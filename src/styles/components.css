@@ -87,11 +87,11 @@
 .tn-hero-card {
   background: var(--royal);
   border-radius: 12px;
-  padding: 24px;
-  margin-bottom: 28px;
+  padding: 16px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column-reverse; /* Mobile: image top, text bottom */
-  gap: 20px;
+  gap: 14px;
   position: relative;
   overflow: hidden;
   cursor: pointer;
@@ -103,6 +103,9 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    padding: 24px;
+    margin-bottom: 28px;
+    gap: 20px;
   }
 }
 .tn-hero-card:hover { transform: translateY(-2px); }
@@ -149,9 +152,16 @@
 }
 .tn-hero-meta {
   display: flex;
-  gap: 16px;
-  font-size: 13px;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 12px;
   color: var(--aster);
+}
+@media (min-width: 768px) {
+  .tn-hero-meta {
+    gap: 16px;
+    font-size: 13px;
+  }
 }
 .tn-hero-meta span { display: flex; align-items: center; gap: 4px; }
 .tn-hero-img-placeholder {
@@ -185,18 +195,22 @@
   display: block;
 }
 
-/* Regular Card */
 .tn-card {
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 20px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
   text-decoration: none;
   transition: transform 0.2s, border-color 0.2s;
   position: relative;
   overflow: hidden;
+}
+@media (min-width: 768px) {
+  .tn-card {
+    padding: 20px;
+  }
 }
 .tn-card:hover {
   border-color: rgba(155,172,216,0.3);
@@ -288,21 +302,28 @@
 }
 .tn-art-title {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.2;
   letter-spacing: -0.03em;
   color: var(--luster);
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 @media (min-width: 768px) {
-  .tn-art-title { font-size: 32px; }
+  .tn-art-title { font-size: 32px; margin-bottom: 18px; }
 }
 .tn-art-meta {
-  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
-  padding-bottom: 16px;
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding-bottom: 12px;
   border-bottom: 1px solid var(--border);
-  margin-bottom: 20px;
+  margin-bottom: 16px;
+}
+@media (min-width: 768px) {
+  .tn-art-meta {
+    gap: 16px;
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+  }
 }
 .tn-art-author-wrap { display: flex; align-items: center; gap: 8px; }
 .tn-art-avatar {
@@ -373,15 +394,15 @@
 
 .tn-art-body p {
   font-family: 'Inter', sans-serif;
-  font-size: 16px;
-  line-height: 1.9;
+  font-size: 15px;
+  line-height: 1.8;
   color: var(--aster);
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   letter-spacing: 0.01em;
   font-weight: 400;
 }
 @media (min-width: 768px) {
-  .tn-art-body p { font-size: 17px; }
+  .tn-art-body p { font-size: 17px; line-height: 1.9; margin-bottom: 20px; }
 }
 .tn-art-body strong { color: var(--luster); font-weight: 600; }
 .tn-art-body h2, .tn-art-body h3 {
@@ -450,7 +471,12 @@
 /* Eyebrow wrap & Back button with hover extension */
 .tn-art-eyebrow-wrap {
   display: block;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
+}
+@media (min-width: 768px) {
+  .tn-art-eyebrow-wrap {
+    margin-bottom: 16px;
+  }
 }
 
 .tn-back-wrap {
@@ -476,7 +502,13 @@
               opacity 0.2s ease,
               transform 0.2s ease;
   white-space: nowrap;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
+}
+
+@media (min-width: 768px) {
+  .tn-back-wrap {
+    margin-bottom: 24px;
+  }
 }
 
 .tn-back-wrap:hover {
@@ -518,6 +550,18 @@
   opacity: 1;
   transform: translateX(0);
   color: var(--habanero);
+}
+
+/* On mobile: always show the label since hover doesn't exist on touch */
+@media (max-width: 767px) {
+  .tn-back-wrap {
+    width: 140px;
+    border-radius: 12px;
+  }
+  .tn-back-label {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* Sidebar Title Toggle for collapsible sidebars */

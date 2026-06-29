@@ -69,7 +69,7 @@ export const NavigationProvider = ({ children }) => {
 
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [isDesktopSidebarOpen, setIsDesktopSidebarOpen] = useState(true);
-  const [isTopicOpen, setIsTopicOpen] = useState(false);
+  const [isTopicOpen, setIsTopicOpen] = useState(true);
 
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem("appTheme") || "light";

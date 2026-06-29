@@ -35,23 +35,23 @@
 
 /* SIDEBAR */
 .tn-sidebar {
-  background: var(--card-bg);
+  background: var(--depths);
   border-right: 1px solid var(--border);
-  padding: 20px 16px;
+  padding: 24px 20px;
   overflow: hidden;
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
               opacity 0.35s ease,
               padding 0.4s cubic-bezier(0.4, 0, 0.2, 1),
               border-color 0.3s ease;
 
-  /* Mobile: fixed overlay, slide from left */
+  /* Mobile: fixed overlay, slide from right */
   position: fixed;
   top: 52px;
-  left: 0;
+  right: 0;
   width: 100%;
   height: calc(100vh - 52px);
   z-index: 50;
-  transform: translateX(-100%);
+  transform: translateX(100%);
   opacity: 0;
   pointer-events: none;
   overflow-y: auto;
@@ -66,7 +66,7 @@
 /* Staggered content animation on mobile open */
 .tn-sidebar > .tn-filter-group {
   opacity: 0;
-  transform: translateX(-20px);
+  transform: translateX(20px);
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
@@ -126,10 +126,60 @@
 .tn-sidebar::-webkit-scrollbar-track { background: transparent; }
 .tn-sidebar::-webkit-scrollbar-thumb { background: var(--royal); border-radius: 2px; }
 
+/* Mobile Sidebar Header */
+.tn-mobile-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.tn-mobile-sidebar-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--luster);
+  letter-spacing: -0.02em;
+}
+
+.tn-mobile-sidebar-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--chip-bg);
+  border: 1px solid var(--border);
+  color: var(--aster);
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tn-mobile-sidebar-close:hover {
+  background: rgba(249,133,19,0.12);
+  color: var(--habanero);
+  border-color: rgba(249,133,19,0.3);
+}
+
+@media (min-width: 1024px) {
+  .tn-mobile-sidebar-header {
+    display: none;
+  }
+}
+
 /* MAIN CONTENT */
 .tn-main {
-  padding: 16px 16px 40px; /* Smaller padding on mobile */
+  padding: 12px 12px 40px; /* Smaller padding on mobile */
   min-width: 0; /* Prevent grid blowout */
+}
+@media (min-width: 480px) {
+  .tn-main {
+    padding: 16px 16px 40px;
+  }
 }
 @media (min-width: 768px) {
   .tn-main {
@@ -187,20 +237,26 @@
 }
 
 .tn-article-main {
-  padding: 20px 16px 48px;
-  border-right: 1px solid var(--border);
+  padding: 16px 14px 40px;
+  border-right: none;
   min-width: 0;
 }
 @media (min-width: 768px) {
   .tn-article-main {
+    padding: 24px 28px 48px;
+  }
+}
+@media (min-width: 1024px) {
+  .tn-article-main {
+    border-right: 1px solid var(--border);
     padding: 28px 32px 48px;
   }
 }
 
 .tn-art-sidebar {
-  background: var(--card-bg);
+  background: var(--depths);
   border-left: 1px solid var(--border);
-  padding: 20px 16px;
+  padding: 24px 20px;
   overflow: hidden;
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
               opacity 0.35s ease,
@@ -233,17 +289,24 @@
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
+/* Mobile header should appear instantly */
+.tn-art-sidebar > .tn-mobile-sidebar-header {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
 .tn-art-sidebar.mobile-open > * {
   opacity: 1;
   transform: translateX(0);
 }
 
-.tn-art-sidebar.mobile-open > *:nth-child(1) { transition-delay: 0.08s; }
-.tn-art-sidebar.mobile-open > *:nth-child(2) { transition-delay: 0.16s; }
-.tn-art-sidebar.mobile-open > *:nth-child(3) { transition-delay: 0.24s; }
-.tn-art-sidebar.mobile-open > *:nth-child(4) { transition-delay: 0.32s; }
-.tn-art-sidebar.mobile-open > *:nth-child(5) { transition-delay: 0.40s; }
-.tn-art-sidebar.mobile-open > *:nth-child(6) { transition-delay: 0.48s; }
+.tn-art-sidebar.mobile-open > *:nth-child(2) { transition-delay: 0.08s; }
+.tn-art-sidebar.mobile-open > *:nth-child(3) { transition-delay: 0.16s; }
+.tn-art-sidebar.mobile-open > *:nth-child(4) { transition-delay: 0.24s; }
+.tn-art-sidebar.mobile-open > *:nth-child(5) { transition-delay: 0.32s; }
+.tn-art-sidebar.mobile-open > *:nth-child(6) { transition-delay: 0.40s; }
+.tn-art-sidebar.mobile-open > *:nth-child(7) { transition-delay: 0.48s; }
 
 @media (min-width: 1024px) {
   .tn-art-sidebar {
