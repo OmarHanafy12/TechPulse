@@ -15,11 +15,11 @@ const MainLayout = () => {
   return (
     <div className="tn-root">
       <NavBar />
-      <div 
-        className={`tn-sidebar-backdrop ${isMobileSidebarOpen ? 'visible' : ''}`}
-        onClick={() => setIsMobileSidebarOpen(false)}
-      />
       <main key={pathname} className="tn-page-transition">
+        <div 
+          className={`tn-sidebar-backdrop ${isMobileSidebarOpen ? 'visible' : ''}`}
+          onClick={() => setIsMobileSidebarOpen(false)}
+        />
         <Outlet />
       </main>
       <Footer />
