@@ -56,10 +56,16 @@ npm run dev
 
 The app will open at [http://localhost:3000](http://localhost:3000).
 
-### Build for Production
+### Deployment
+
+This project is configured for deployment on [Vercel](https://vercel.com).
+It includes a `vercel.json` configuration and an `api/` directory for serverless functions (e.g., API proxying).
 
 ```bash
+# Build for production
 npm run build
+
+# Preview locally
 npm run preview
 ```
 
