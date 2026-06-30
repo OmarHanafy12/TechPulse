@@ -101,6 +101,12 @@
   align-items: center;
 }
 
+.tn-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .tn-desktop-toggle-label-wrap {
   display: inline-flex;
   overflow: hidden;
