@@ -59,7 +59,7 @@ const Sidebar = ({
         setFilters(prev => ({ ...prev, topics: allSelected }));
       }
     }
-  }, [topics]);
+  }, [topics, filters, setFilters]);
 
 
 
@@ -105,7 +105,10 @@ const Sidebar = ({
                       checked={!!filters?.topics?.[topic]}
                       onChange={() => handleFilterToggle('topics', topic)}
                     />
-                    {getTopicIcon(topic)}
+                    {(() => {
+                      const TopicIcon = getTopicIcon(topic);
+                      return <TopicIcon />;
+                    })()}
                     <span>{topic}</span>
                   </label>
                 ))}

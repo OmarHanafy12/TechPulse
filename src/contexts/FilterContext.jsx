@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useCallback } from 'react';
 
 const FilterContext = createContext();
 
@@ -19,9 +19,9 @@ export const FilterProvider = ({ children }) => {
 
   const [filters, setFilters] = useState(initialFilters);
 
-  const handleClearFilters = () => {
+  const handleClearFilters = useCallback(() => {
     setFilters(initialFilters);
-  };
+  }, []);
 
   return (
     <FilterContext.Provider value={{ filters, setFilters, handleClearFilters }}>

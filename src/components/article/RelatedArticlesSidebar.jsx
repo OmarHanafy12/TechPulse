@@ -24,13 +24,13 @@ const RelatedArticlesSidebar = ({ currentArticle }) => {
           <>
             <div className="tn-sug-label">More in {currentArticle.topic}</div>
             {articlesToShow.map(article => {
-              const { colorClass, icon } = getTopicStyles(article.topic);
+              const { colorClass, icon: TopicIcon } = getTopicStyles(article.topic);
               const imageUrl = article.imageUrls && article.imageUrls.length > 0 ? article.imageUrls[0] : null;
               
               return (
                 <Link to={`/article/${article.id}`} key={article.id} className="tn-sug-card">
                   <div className="tn-sug-img">
-                    {imageUrl ? <img src={imageUrl} alt={article.title} /> : icon}
+                    {imageUrl ? <img src={imageUrl} alt={article.title} /> : <TopicIcon />}
                   </div>
                   <div className="tn-sug-content">
                     <div className={`tn-sug-cat ${colorClass}`}>{article.topic}</div>

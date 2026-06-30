@@ -4,7 +4,7 @@ import { IconUser, IconClock, IconEye } from "@tabler/icons-react";
 import { getTopicStyles } from '@/utils/topicUtils';
 
 const ArticleCard = ({ article, onClick, isHero = false }) => {
-  const { colorClass, dotClass, icon } = getTopicStyles(article.topic);
+  const { colorClass, dotClass, icon: TopicIcon } = getTopicStyles(article.topic);
   const imageUrl = article.imageUrls && article.imageUrls.length > 0 ? article.imageUrls[0] : null;
 
   if (isHero) {
@@ -19,7 +19,7 @@ const ArticleCard = ({ article, onClick, isHero = false }) => {
           </div>
         </div>
         <div className="tn-hero-img-placeholder">
-          {imageUrl ? <img src={imageUrl} alt={article.title} /> : icon}
+          {imageUrl ? <img src={imageUrl} alt={article.title} /> : <TopicIcon />}
         </div>
       </Link>
     );
@@ -30,7 +30,7 @@ const ArticleCard = ({ article, onClick, isHero = false }) => {
       <div className={`tn-card-accent ${colorClass ? '' : 'default'}`}></div>
       <div className="tn-card-body">
         <div className={`tn-card-cat ${colorClass}`}>
-          {icon} {article.topic}
+          <TopicIcon /> {article.topic}
         </div>
         <div className="tn-card-title">{article.title}</div>
         <div className="tn-card-excerpt">{article.summary}</div>
