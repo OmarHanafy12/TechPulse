@@ -9,7 +9,7 @@ A modern technology news aggregator built with React. Browse, filter, and search
 - **React 19** — UI framework
 - **Vite** — Build tool & dev server
 - **React Router v6** — Client-side routing
-- **GNews API** — Technology news data source
+- **NewsAPI** — Technology news data source
 - **react-datepicker** — Date range filtering
 - **yet-another-react-lightbox** — Image gallery viewer
 - **@tabler/icons-react** — Icon system
@@ -34,7 +34,7 @@ A modern technology news aggregator built with React. Browse, filter, and search
 ### Prerequisites
 
 - Node.js 20+
-- A free [GNews API key](https://gnews.io/)
+- A free [NewsAPI key](https://newsapi.org/)
 
 ### Installation
 
@@ -48,7 +48,7 @@ npm install
 
 # Create your environment file
 cp .env.example .env.local
-# Then edit .env.local and add your GNews API key
+# Then edit .env.local and add your NewsAPI key
 
 # Start the development server
 npm run dev
